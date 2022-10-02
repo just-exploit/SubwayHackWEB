@@ -1,0 +1,10 @@
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+#file-selector{
+  font-size: 100px;
+  width: 400px;
+}
