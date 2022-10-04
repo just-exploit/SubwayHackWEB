@@ -1,4 +1,4 @@
-/*#container{
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,8 +9,7 @@
   background-color: red;
 }
 #content{
-  background-color: green;
-}
+  
 #file-selector{
   font-size: 100px;
   width: 400px;
@@ -19,6 +18,5 @@
 body{
   background-color: black;
 }
-h1, p{
-  color: white;
-}
+
+  
