@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title></title>
   <link rel="stylesheet" href="style.css">
+  <script src="FileSaver.js"></script>
   <script src="main.js" defer></script>
 </head>
 
@@ -22,9 +23,9 @@
       Red boost <br> <input type="number" name="bVerm" id="bVerm"> <br>
       blue boost <br> <input type="number" name="bAzul" id="bAzul"> <br>
       <input type="file" name="file-selector" id="file-selector"> <br>
-      <input type="button" value="Ready" onclick="pegarData()">
+      <input type="button" value="Download" onclick="pegarData(1)">
+      <input type="button" value="Get code" onclick="pegarData(2)">
       <div id="resultado">
-        <textarea name="result" id="result" cols="30" rows="10">Your code will appears here.</textarea>
       </div>
     </div>
   </div>

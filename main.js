@@ -1,6 +1,4 @@
-//let file = document.querySelector("#file-selector").addEventListener("change", pegarData);
-
-function pegarData(){
+function pegarData(option){
   let moedas = document.querySelector("#moedas").value;
   let chaves = document.querySelector("#chaves").value;
   let snowboards = document.querySelector("#snowboards").value;
@@ -8,41 +6,45 @@ function pegarData(){
   let bAzul = document.querySelector("#bAzul").value;
   let inputs = [moedas, chaves, snowboards, bVerm, bAzul];
 
-  const file = document.querySelector("#file-selector").files[0]; // first file in files list
-  if (file){
+  const fileSelector = document.querySelector("#file-selector").files[0]; // first file in files list
+  if (fileSelector){
     var reader = new FileReader();
-    reader.readAsText(file, "UTF-8");
+    reader.readAsText(fileSelector, "UTF-8");
     reader.onload = (event) =>{
-      let file_content = event.target.result;
-    for (let item = 0; item < inputs.length; item++){
-      file_content = alterarData(file_content, item, inputs[item])
-    }
-    document.querySelector('textarea').innerText = file_content
-      /*console.log(item);
-      console.log(file_content)
-      document.querySelector('textarea').innerText = file_content;*/
+      let file = event.target.result;
+      alterarData(file, inputs, option);
     }
   }
 }
 
-function alterarData(data, id, valor){
-  //let patt = new RegExp(`\\\"${id}\\\":{\\\"value\\\":[0-9]*`);
-  let patt = RegExp(`/\\"${id}\\":{\\"value\\":[0-9]*/`);
-  let newPatt = `\\"${id}\\":{\\"value\\":${valor}`;
-  console.log(data.search(patt))
-  return data.replace(patt, newPatt);
+function alterarData(data, valor, option){
+  for (let item = 0; item < valor.length; item++){
+    if (valor[item] == ""){
+      valor[item] = 0;
+    }
+  }
+  data = data.replace(/\\"1\\":{\\"value\\":[0-9]*/, `\\"1\\":{\\"value\\":${valor[0]}`);
+  data = data.replace(/\\"2\\":{\\"value\\":[0-9]*/, `\\"2\\":{\\"value\\":${valor[1]}`);
+  data = data.replace(/\\"3\\":{\\"value\\":[0-9]*/, `\\"3\\":{\\"value\\":${valor[2]}`);
+  data = data.replace(/\\"4\\":{\\"value\\":[0-9]*/, `\\"4\\":{\\"value\\":${valor[3]}`);
+  data = data.replace(/\\"5\\":{\\"value\\":[0-9]*/, `\\"5\\":{\\"value\\":${valor[4]}`);
+  
+  switch (option) {
+    case 1:
+      criarDownload(data);
+    case 2:
+      mostrarResultado(data);
+  }
 }
-/*let p = document.querySelector("p");
-p.innerHTML = '{"version":3,"data":"{\"lastSaved\":\"2022-08-29T10:17:24.172974Z\",\"patchVersion\":0,\"currencies\":{\"3\":{\"value\":10,\"expirationType\":0},\"2\":{\"value\":5,\"expirationType\":0},\"4\":{\"value\":5,\"expirationType\":0},\"5\":{\"value\":5,\"expirationType\":0},\"1\":{\"value\":10000,\"expirationType\":0}},\"lootboxQueue\":{\"unopenedLootboxes\":[]},\"currencyAllowedInRun\":{},\"lootBoxesOpened\":{},\"ownedOnlyBuyOnceProducts\":[]}"}';
-/*
-money = 1 
-keys = 2
-snowboard = 3
-boost_verm = 4
-boost_azul = 5
-moeda_spike = 23
-moeda_yutani = 24
-moeda_tricky = 22
-moeda_jake = 20
-moeda_fresh = 21
-*/
+
+function mostrarResultado(data){
+  //let textArea = document.querySelector("#result");
+  //textArea.innerText = data;
+  let div = document.getElementById("resultado");
+  div.innerHTML = `<textarea name="result" id="result" cols="60" rows="30">${data}</textarea>`;
+}
+
+function criarDownload(file){
+  let blob = new Blob([file], {type: "text/plain"});
+  saveAs(blob, "wallet.json");
+}
