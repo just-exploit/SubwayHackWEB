@@ -1,3 +1,5 @@
+alert(document.cookie)
+
 function getData(){
   let moedas = document.querySelector("#moedas").value;
   let chaves = document.querySelector("#chaves").value;
@@ -9,9 +11,10 @@ function getData(){
   let tricky = document.querySelector("#tricky").value;
   let spike = document.querySelector("#spike").value;
   let yutani = document.querySelector("#yutani").value;
-  let inputs = [moedas, chaves, snowboards, bVerm, bAzul, jake, fresh, tricky, spike, yutani];
+  let eventCash = document.querySelector("#eventCash").value;
+  let inputs = [moedas, chaves, snowboards, bVerm, bAzul, jake, fresh, tricky, spike, yutani, eventCash];
   
-  let sample = '{"version":3,"data":"{\\"lastSaved\\":\\"2022-08-08T12:23:25.493731Z\\",\\"patchVersion\\":0,\\"currencies\\":{\\"3\\":{\\"value\\":0,\\"expirationType\\":0},\\"2\\":{\\"value\\":0,\\"expirationType\\":0},\\"4\\":{\\"value\\":0,\\"expirationType\\":0},\\"5\\":{\\"value\\":0,\\"expirationType\\":0},\\"1\\":{\\"value\\":0,\\"expirationType\\":0}, \\"20\\":{\\"value\\":0}, \\"21\\":{\\"value\\":0}, \\"22\\":{\\"value\\":0}, \\"23\\":{\\"value\\":0}, \\"24\\":{\\"value\\":0}},\\"lootboxQueue\\":{\\"unopenedLootboxes\\":[]},\\"currencyAllowedInRun\\":{},\\"lootBoxesOpened\\":{},\\"ownedOnlyBuyOnceProducts\\":[]}"}';
+  let sample = '{"version":3,"data":"{\\"lastSaved\\":\\"2022-08-08T12:23:25.493731Z\\",\\"patchVersion\\":0,\\"currencies\\":{\\"3\\":{\\"value\\":0,\\"expirationType\\":0},\\"2\\":{\\"value\\":0,\\"expirationType\\":0},\\"4\\":{\\"value\\":0,\\"expirationType\\":0},\\"5\\":{\\"value\\":0,\\"expirationType\\":0},\\"1\\":{\\"value\\":0,\\"expirationType\\":0}, \\"20\\":{\\"value\\":0}, \\"21\\":{\\"value\\":0}, \\"22\\":{\\"value\\":0}, \\"23\\":{\\"value\\":0}, \\"24\\":{\\"value\\":0}\\"6\\":{\\"value\\":0}},\\"lootboxQueue\\":{\\"unopenedLootboxes\\":[]},\\"currencyAllowedInRun\\":{},\\"lootBoxesOpened\\":{},\\"ownedOnlyBuyOnceProducts\\":[]}"}';
   
   changeData(sample, inputs)
 }
@@ -32,6 +35,7 @@ function changeData(data, value){
   data = data.replace(/\\"22\\":{\\"value\\":[0-9]*/, `\\"22\\":{\\"value\\":${value[7]}`)
   data = data.replace(/\\"23\\":{\\"value\\":[0-9]*/, `\\"23\\":{\\"value\\":${value[8]}`)
   data = data.replace(/\\"24\\":{\\"value\\":[0-9]*/, `\\"24\\":{\\"value\\":${value[9]}`)
+  data = data.replace(/\\"6\\":{\\"value\\":[0-9]*/, `\\"6\\":{\\"value\\":${value[10]}`);
   
   for (let i = 0; i < value.length; i++){
     console.log(value[i])
