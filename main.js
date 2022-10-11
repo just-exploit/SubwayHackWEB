@@ -1,50 +1,52 @@
-function pegarData(option){
+function getData(){
   let moedas = document.querySelector("#moedas").value;
   let chaves = document.querySelector("#chaves").value;
   let snowboards = document.querySelector("#snowboards").value;
   let bVerm = document.querySelector("#bVerm").value;
   let bAzul = document.querySelector("#bAzul").value;
-  let inputs = [moedas, chaves, snowboards, bVerm, bAzul];
-
-  const fileSelector = document.querySelector("#file-selector").files[0]; // first file in files list
-  if (fileSelector){
-    var reader = new FileReader();
-    reader.readAsText(fileSelector, "UTF-8");
-    reader.onload = (event) =>{
-      let file = event.target.result;
-      alterarData(file, inputs, option);
-    }
-  }
-}
-
-function alterarData(data, valor, option){
-  for (let item = 0; item < valor.length; item++){
-    if (valor[item] == ""){
-      valor[item] = 0;
-    }
-  }
-  data = data.replace(/\\"1\\":{\\"value\\":[0-9]*/, `\\"1\\":{\\"value\\":${valor[0]}`);
-  data = data.replace(/\\"2\\":{\\"value\\":[0-9]*/, `\\"2\\":{\\"value\\":${valor[1]}`);
-  data = data.replace(/\\"3\\":{\\"value\\":[0-9]*/, `\\"3\\":{\\"value\\":${valor[2]}`);
-  data = data.replace(/\\"4\\":{\\"value\\":[0-9]*/, `\\"4\\":{\\"value\\":${valor[3]}`);
-  data = data.replace(/\\"5\\":{\\"value\\":[0-9]*/, `\\"5\\":{\\"value\\":${valor[4]}`);
+  let jake = document.querySelector("#jake").value;
+  let fresh = document.querySelector("#fresh").value;
+  let tricky = document.querySelector("#tricky").value;
+  let spike = document.querySelector("#spike").value;
+  let yutani = document.querySelector("#yutani").value;
+  let inputs = [moedas, chaves, snowboards, bVerm, bAzul, jake, fresh, tricky, spike, yutani];
   
-  switch (option) {
-    case 1:
-      criarDownload(data);
-    case 2:
-      mostrarResultado(data);
-  }
+  let sample = '{"version":3,"data":"{\\"lastSaved\\":\\"2022-08-08T12:23:25.493731Z\\",\\"patchVersion\\":0,\\"currencies\\":{\\"3\\":{\\"value\\":0,\\"expirationType\\":0},\\"2\\":{\\"value\\":0,\\"expirationType\\":0},\\"4\\":{\\"value\\":0,\\"expirationType\\":0},\\"5\\":{\\"value\\":0,\\"expirationType\\":0},\\"1\\":{\\"value\\":0,\\"expirationType\\":0}, \\"20\\":{\\"value\\":0}, \\"21\\":{\\"value\\":0}, \\"22\\":{\\"value\\":0}, \\"23\\":{\\"value\\":0}, \\"24\\":{\\"value\\":0}},\\"lootboxQueue\\":{\\"unopenedLootboxes\\":[]},\\"currencyAllowedInRun\\":{},\\"lootBoxesOpened\\":{},\\"ownedOnlyBuyOnceProducts\\":[]}"}';
+  
+  changeData(sample, inputs)
 }
 
-function mostrarResultado(data){
-  //let textArea = document.querySelector("#result");
-  //textArea.innerText = data;
+function changeData(data, value){
+  for (let item = 0; item < value.length; item++){
+    if (value[item] == ""){
+      value[item] = 0;
+    }
+  }
+  data = data.replace(/\\"1\\":{\\"value\\":[0-9]*/, `\\"1\\":{\\"value\\":${value[0]}`);
+  data = data.replace(/\\"2\\":{\\"value\\":[0-9]*/, `\\"2\\":{\\"value\\":${value[1]}`);
+  data = data.replace(/\\"3\\":{\\"value\\":[0-9]*/, `\\"3\\":{\\"value\\":${value[2]}`);
+  data = data.replace(/\\"4\\":{\\"value\\":[0-9]*/, `\\"4\\":{\\"value\\":${value[3]}`);
+  data = data.replace(/\\"5\\":{\\"value\\":[0-9]*/, `\\"5\\":{\\"value\\":${value[4]}`);
+  data = data.replace(/\\"20\\":{\\"value\\":[0-9]*/, `\\"20\\":{\\"value\\":${value[5]}`);
+  data = data.replace(/\\"21\\":{\\"value\\":[0-9]*/, `\\"21\\":{\\"value\\":${value[6]}`)
+  data = data.replace(/\\"22\\":{\\"value\\":[0-9]*/, `\\"22\\":{\\"value\\":${value[7]}`)
+  data = data.replace(/\\"23\\":{\\"value\\":[0-9]*/, `\\"23\\":{\\"value\\":${value[8]}`)
+  data = data.replace(/\\"24\\":{\\"value\\":[0-9]*/, `\\"24\\":{\\"value\\":${value[9]}`)
+  
+  for (let i = 0; i < value.length; i++){
+    console.log(value[i])
+  }
+  
+  showResult(data);
+  makeDownload(data);
+}
+
+function showResult(data){
   let div = document.getElementById("resultado");
   div.innerHTML = `<textarea name="result" id="result" cols="60" rows="30">${data}</textarea>`;
 }
 
-function criarDownload(file){
-  let blob = new Blob([file], {type: "text/plain"});
+function makeDownload(data){
+  let blob = new Blob([data], {type: "text/plain"});
   saveAs(blob, "wallet.json");
 }
