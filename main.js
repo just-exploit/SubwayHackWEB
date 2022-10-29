@@ -49,6 +49,7 @@ function showResult(data){
 }
 
 function makeDownload(data){
+  alert("Put this file in Android/data/com.kiloo.subwaysurf/files/profile/")
   let blob = new Blob([data], {type: "text/plain"});
   saveAs(blob, "wallet.json");
 }
