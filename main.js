@@ -1,5 +1,3 @@
-alert(document.cookie)
-
 function getData(){
   let moedas = document.querySelector("#moedas").value;
   let chaves = document.querySelector("#chaves").value;
@@ -47,7 +45,7 @@ function changeData(data, value){
 
 function showResult(data){
   let div = document.getElementById("resultado");
-  div.innerHTML = `<textarea name="result" id="result" cols="60" rows="30">${data}</textarea>`;
+  div.innerHTML = `<textarea name="result" id="result" cols="60" rows="12">${data}</textarea>`;
 }
 
 function makeDownload(data){
