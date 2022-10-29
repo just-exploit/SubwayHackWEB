@@ -45,7 +45,7 @@ function changeData(data, value){
 
 function showResult(data){
   let div = document.getElementById("resultado");
-  div.innerHTML = `<textarea name="result" id="result" cols="60" rows="12">${data}</textarea>`;
+  div.innerHTML = `<textarea name="result" id="result" cols="50" rows="12">${data}</textarea>`;
 }
 
 function makeDownload(data){
