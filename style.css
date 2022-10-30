@@ -24,6 +24,7 @@ body{
   flex-wrap: wrap;
 }
 .campo{
+  font-size: 11px;
   margin: 5px;
   display:block;
 }
